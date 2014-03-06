@@ -17,40 +17,42 @@ import Pidev.entite.ScoreboardPrices;
 public class ScoreboardService implements ScoreboardServiceRemote {
 	@PersistenceContext(unitName = "JPA")
 	private EntityManager em;
-    /**
-     * Default constructor. 
-     */
-    public ScoreboardService() {
-        // TODO Auto-generated constructor stub
-    }
 
-	@Override
-	public void add(ScoreboardPrices S) {
-		em.persist(S);
-		
+	/**
+	 * Default constructor.
+	 */
+	public ScoreboardService() {
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void update(ScoreboardPrices S) {
-		em.merge(S);
-		
+	public void add(ScoreboardPrices scoreBP) {
+		em.persist(scoreBP);
+
 	}
 
 	@Override
-	public ScoreboardPrices findByID(int ID) {
-		return em.find(ScoreboardPrices.class,ID);
+	public void update(ScoreboardPrices scoreBP) {
+		em.merge(scoreBP);
+
+	}
+
+	@Override
+	public ScoreboardPrices findByID(int id) {
+		return em.find(ScoreboardPrices.class, id);
 	}
 
 	@Override
 	public List<ScoreboardPrices> findAll() {
-		return em.createQuery("from scoreboardprices",ScoreboardPrices.class).getResultList();
+		return em.createQuery("from ScoreboardPrices", ScoreboardPrices.class)
+				.getResultList();
 	}
 
 	@Override
-	public void delete(ScoreboardPrices S) {
-		ScoreboardPrices So=findByID(S.getId());
-		em.remove(So);
-		
+	public void delete(ScoreboardPrices scoreBP) {
+		ScoreboardPrices so = findByID(scoreBP.getId());
+		em.remove(so);
+
 	}
 
 }

@@ -8,10 +8,14 @@ import Pidev.entite.Corporate;
 
 @Remote
 public interface CorporateServiceRemote {
-	void add(Corporate C);
-	void update(Corporate C);
-	 Corporate findByID(int ID);
-	 List<Corporate> findAll();
-	 void delete(Corporate C);
+	void add(Corporate corporate);
+
+	void update(Corporate corporate);
+
+	Corporate findByID(int id);
+
+	List<Corporate> findAll();
+
+	void delete(Corporate corporate);
 
 }

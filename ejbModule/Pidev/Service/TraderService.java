@@ -26,32 +26,32 @@ public class TraderService implements TraderServiceRemote {
     }
 
 	@Override
-	public void add(Trader T) {
-		em.persist(T);
+	public void add(Trader trader) {
+		em.persist(trader);
 		
 	}
 
 	@Override
-	public void update(Trader T) {
-		em.merge(T);
+	public void update(Trader trader) {
+		em.merge(trader);
 		
 	}
 
 	@Override
-	public Trader findByID(int ID) {
+	public Trader findByID(int id) {
 		// TODO Auto-generated method stub
-		return em.find(Trader.class,ID);
+		return em.find(Trader.class,id);
 	}
 
 	@Override
 	public List<Trader> findAll() {
-		return em.createQuery("from trader",Trader.class).getResultList();
+		return em.createQuery("from Trader",Trader.class).getResultList();
 	}
 
 	@Override
-	public void delete(Trader T) {
-		Trader Ta=findByID(T.getIdTradeur());
-		em.remove(Ta);
+	public void delete(Trader trader) {
+		Trader ta=findByID(trader.getIdTradeur());
+		em.remove(ta);
 		
 	}
 

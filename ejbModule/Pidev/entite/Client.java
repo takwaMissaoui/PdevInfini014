@@ -1,10 +1,11 @@
 package Pidev.entite;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,89 +16,115 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @SuppressWarnings("serial")
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "t_Client")
 public class Client implements Serializable {
 	/**
 	 * 
 	 */
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	protected int ID_Client;
-	protected String Libelle;
-	protected String Adresse;
-	protected String Mail;
-	protected Long Tel;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
+	protected int idClient;
 
-	@OneToMany(mappedBy = "Buyer", fetch = FetchType.LAZY)
-	protected List<Transaction> transactionBuyer = new ArrayList<Transaction>();
+	protected String libelle;
 
-	@OneToMany(mappedBy = "Seller", fetch = FetchType.LAZY)
-	protected List<Transaction> transactionSeller = new ArrayList<Transaction>();
+	@Column(unique = true)
+	protected String address;
+
+	@Column(unique = true, nullable = false)
+	protected String mail;
+
+	@Column(unique = true, nullable = false)
+	protected String login;
+
+	@Column(nullable = false)
+	protected String pass;
+
+	@Column(name = "num_telephone")
+	protected Long tel;
+
+	@OneToMany(mappedBy = "buyer", fetch = FetchType.LAZY)
+	protected List<Transaction> transactionBuyer;
+
+	@OneToMany(mappedBy = "seller", fetch = FetchType.LAZY)
+	protected List<Transaction> transactionSeller;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "Client_Trader", joinColumns = { @JoinColumn(name = "Client_fk") }, inverseJoinColumns = { @JoinColumn(name = "Trader_fk") })
-	protected List<Trader> trader = new ArrayList<Trader>();
+	protected Set<Trader> trader;
 
 	public Client() {
 
 	}
 
-	public int getID_Client() {
-		return ID_Client;
+	public int getIdClient() {
+		return idClient;
 	}
 
-	public void setID_Client(int iD_Client) {
-		ID_Client = iD_Client;
+	public void setIdClient(int idClient) {
+		this.idClient = idClient;
 	}
 
 	public String getLibelle() {
-		return Libelle;
+		return libelle;
 	}
 
 	public void setLibelle(String libelle) {
-		Libelle = libelle;
+		this.libelle = libelle;
 	}
 
-	public String getAdresse() {
-		return Adresse;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setAdresse(String adresse) {
-		Adresse = adresse;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String getMail() {
-		return Mail;
+		return mail;
 	}
 
 	public void setMail(String mail) {
-		Mail = mail;
+		this.mail = mail;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
 	}
 
 	public Long getTel() {
-		return Tel;
+		return tel;
 	}
 
 	public void setTel(Long tel) {
-		Tel = tel;
+		this.tel = tel;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ID_Client;
+		result = prime * result + idClient;
 		return result;
-	}
-
-	@Override
-	public String toString() {
-		return "Client [ID_Client=" + ID_Client + ", Libelle=" + Libelle
-				+ ", Adresse=" + Adresse + ", Mail=" + Mail + ", Tel=" + Tel;
 	}
 
 	@Override
@@ -109,16 +136,16 @@ public class Client implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Client other = (Client) obj;
-		if (ID_Client != other.ID_Client)
+		if (idClient != other.idClient)
 			return false;
 		return true;
 	}
 
-	public List<Trader> getTrader() {
+	public Set<Trader> getTrader() {
 		return trader;
 	}
 
-	public void setTrader(List<Trader> trader) {
+	public void setTrader(Set<Trader> trader) {
 		this.trader = trader;
 	}
 
@@ -138,21 +165,14 @@ public class Client implements Serializable {
 		this.transactionSeller = transactionSeller;
 	}
 
-	public void addTrader(Trader Tr) {
-		Trader T = Tr;
-		this.trader.add(T);
-	}
-
-	public boolean add(Trader e) {
-		return trader.add(e);
-	}
-
-	public boolean add(Transaction e) {
-		return transactionBuyer.add(e);
-	}
-
-	public void add(int index, Transaction element) {
-		transactionSeller.add(index, element);
+	@Override
+	public String toString() {
+		return "Client [idClient=" + idClient + ", libelle=" + libelle
+				+ ", address=" + address + ", mail=" + mail + ", login="
+				+ login + ", pass=" + pass + ", tel=" + tel
+				+ ", transactionBuyer=" + transactionBuyer
+				+ ", transactionSeller=" + transactionSeller + ", trader="
+				+ trader + "]";
 	}
 
 }

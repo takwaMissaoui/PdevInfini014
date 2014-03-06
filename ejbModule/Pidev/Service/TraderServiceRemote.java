@@ -8,10 +8,14 @@ import Pidev.entite.Trader;
 
 @Remote
 public interface TraderServiceRemote {
-	void add(Trader T);
-	void update(Trader T);
-	Trader findByID(int ID);
-	 List<Trader> findAll();
-	 void delete(Trader T);
+	void add(Trader trader);
+
+	void update(Trader trader);
+
+	Trader findByID(int id);
+
+	List<Trader> findAll();
+
+	void delete(Trader trader);
 
 }

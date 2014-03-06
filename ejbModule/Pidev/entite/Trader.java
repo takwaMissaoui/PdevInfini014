@@ -2,50 +2,77 @@ package Pidev.entite;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @SuppressWarnings("serial")
 @Entity
+@Table(name = "t_trader")
 public class Trader implements Serializable {
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_trader")
 	private int idTradeur;
-    private String Libelle;
-    private String Login;
-    private String pass;
+
+	private String libelle;
+
+	@Column(nullable = false, unique = true)
+	private String login;
+
+	@Column(nullable = false)
+	private String password;
+
+	@Column(nullable = false, unique = true)
+	private String mail;
+
 	public Trader() {
 		// TODO Auto-generated constructor stub
 	}
+
 	public int getIdTradeur() {
 		return idTradeur;
 	}
+
 	public void setIdTradeur(int idTradeur) {
 		this.idTradeur = idTradeur;
 	}
+
 	public String getLibelle() {
-		return Libelle;
+		return libelle;
 	}
+
 	public void setLibelle(String libelle) {
-		Libelle = libelle;
+		this.libelle = libelle;
 	}
+
 	public String getLogin() {
-		return Login;
+		return login;
 	}
+
 	public void setLogin(String login) {
-		Login = login;
+		this.login = login;
 	}
-	public String getPass() {
-		return pass;
+
+	public String getPassword() {
+		return password;
 	}
-	public void setPass(String pass) {
-		this.pass = pass;
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	@Override
-	public String toString() {
-		return "Trader [idTradeur=" + idTradeur + ", Libelle=" + Libelle
-				+ ", Login=" + Login + ", pass=" + pass + "]";
+
+	public String getMail() {
+		return mail;
 	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -53,6 +80,7 @@ public class Trader implements Serializable {
 		result = prime * result + idTradeur;
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -67,5 +95,11 @@ public class Trader implements Serializable {
 		return true;
 	}
 
-}
+	@Override
+	public String toString() {
+		return "Trader [idTradeur=" + idTradeur + ", libelle=" + libelle
+				+ ", login=" + login + ", password=" + password + ", mail="
+				+ mail + "]";
+	}
 
+}

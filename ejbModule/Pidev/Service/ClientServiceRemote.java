@@ -8,11 +8,14 @@ import Pidev.entite.Client;
 
 @Remote
 public interface ClientServiceRemote {
-	void add(Client C);
-	void update(Client C);
-	 Client findByID(int ID);
-	 List<Client> findAll();
-	 void delete(Client C);
-	
+	void add(Client client);
+
+	void update(Client client);
+
+	Client findByID(int ID);
+
+	List<Client> findAll();
+
+	void delete(Client client);
 
 }

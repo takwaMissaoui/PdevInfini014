@@ -6,14 +6,16 @@ import javax.ejb.Remote;
 
 import Pidev.entite.ScoreboardPrices;
 
-
-
 @Remote
 public interface ScoreboardServiceRemote {
-	void add(ScoreboardPrices S);
-	void update(ScoreboardPrices S);
-	ScoreboardPrices findByID(int ID);
-	 List<ScoreboardPrices> findAll();
-	 void delete(ScoreboardPrices S);
+	void add(ScoreboardPrices scoreBP);
+
+	void update(ScoreboardPrices scoreBP);
+
+	ScoreboardPrices findByID(int id);
+
+	List<ScoreboardPrices> findAll();
+
+	void delete(ScoreboardPrices scoreBP);
 
 }

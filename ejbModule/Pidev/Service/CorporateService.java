@@ -17,39 +17,41 @@ import Pidev.entite.Corporate;
 public class CorporateService implements CorporateServiceRemote {
 	@PersistenceContext(unitName = "JPA")
 	private EntityManager em;
-    /**
-     * Default constructor. 
-     */
-    public CorporateService() {
-        // TODO Auto-generated constructor stub
-    }
 
-	@Override
-	public void add(Corporate C) {
-		em.persist(C);	
-		}
-
-	@Override
-	public void update(Corporate C) {
-		em.merge(C);
-		
+	/**
+	 * Default constructor.
+	 */
+	public CorporateService() {
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public Corporate findByID(int ID) {
-		return em.find(Corporate.class,ID);
+	public void add(Corporate corporate) {
+		em.persist(corporate);
+	}
+
+	@Override
+	public void update(Corporate corporate) {
+		em.merge(corporate);
+
+	}
+
+	@Override
+	public Corporate findByID(int id) {
+		return em.find(Corporate.class, id);
 	}
 
 	@Override
 	public List<Corporate> findAll() {
-		return em.createQuery("from Corporate",Corporate.class).getResultList();
-	           
+		return em.createQuery("from Corporate", Corporate.class)
+				.getResultList();
+
 	}
 
 	@Override
-	public void delete(Corporate C) {
-	Corporate Co=findByID(C.getID_Client());
-	em.remove(Co);
+	public void delete(Corporate corporate) {
+		Corporate co = findByID(corporate.getIdClient());
+		em.remove(co);
 	}
 
 }

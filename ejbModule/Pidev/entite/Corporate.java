@@ -1,35 +1,45 @@
 package Pidev.entite;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+@SuppressWarnings("serial")
 @Entity
-
-	
-
-public class Corporate extends Client  {
-  /**
+@Table(name = "t_corporate")
+public class Corporate extends Client {
+	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-    private double Capitale;
+
+	private double capitale;
+	
+	@OneToMany(fetch = FetchType.LAZY)
+	private Set<CurrencyAccountCorporate> account;
+
 	public Corporate() {
-	super();
+
 	}
+
 	public double getCapitale() {
-		return Capitale;
+		return capitale;
 	}
+
 	public void setCapitale(double capitale) {
-		Capitale = capitale;
+		this.capitale = capitale;
 	}
-	@Override
-	public String toString() {
-		return "Corporate [Capitale=" + Capitale + ", ID_Client=" + ID_Client
-				+ ", Libelle=" + Libelle + ", Adresse=" + Adresse + ", Mail="
-				+ Mail + ", Tel=" + Tel + ", transaction=" 
-				+ ", trader=" + trader + "]";
+
+	public Set<CurrencyAccountCorporate> getAccount() {
+		return account;
 	}
-	
-	
-	
+
+	public void setAccount(Set<CurrencyAccountCorporate> account) {
+		this.account = account;
+	}
+
+
 
 }

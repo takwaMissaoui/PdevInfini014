@@ -1,45 +1,76 @@
 package Pidev.entite;
 
-import java.util.List;
+import java.util.Set;
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+@SuppressWarnings("serial")
 @Entity
-
+@Table(name = "t_BanqueCommercial")
 public class BanqueCommercial extends Client {
-    /**
+	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	private double ValeurPropre;
-	@OneToOne
-	@JoinColumn(name="Scoreboard_FK")
+	@Column(name = "req_confirmed")
+	private boolean reqConfirmed;
+
+	@Column(name = "fond_propre")
+	private double fondPropre;
+
+	@OneToOne( fetch = FetchType.LAZY)
+	@JoinColumn(name = "Scoreboard_FK")
 	private ScoreboardPrices scoreboard;
+
 	@OneToMany(fetch = FetchType.LAZY)
-	private List<CurrencyAccount>account;
-    
-	
-    
+	private Set<CurrencyAccountBanque> account;
+
 	public BanqueCommercial() {
-		// TODO Auto-generated constructor stub
+		this.reqConfirmed = false;
 	}
 
-
-
-	public double getValeurPropre() {
-		return ValeurPropre;
+	public double getFondPropre() {
+		return fondPropre;
 	}
 
-
-
-	public void setValeurPropre(double valeurPropre) {
-		ValeurPropre = valeurPropre;
+	public void setFondPropre(double fondPropre) {
+		this.fondPropre = fondPropre;
 	}
-	
+
+	public boolean isReqConfirmed() {
+		return reqConfirmed;
+	}
+
+	public void setReqConfirmed(boolean reqConfirmed) {
+		this.reqConfirmed = reqConfirmed;
+	}
+
+	public ScoreboardPrices getScoreboard() {
+		return scoreboard;
+	}
+
+	public void setScoreboard(ScoreboardPrices scoreboard) {
+		this.scoreboard = scoreboard;
+	}
+
+	public Set<CurrencyAccountBanque> getAccount() {
+		return account;
+	}
+
+	public void setAccount(Set<CurrencyAccountBanque> account) {
+		this.account = account;
+	}
+
+	@Override
+	public String toString() {
+		return "BanqueCommercial [reqConfirmed=" + reqConfirmed
+				+ ", fondPropre=" + fondPropre + ", scoreboard=" + scoreboard
+				+ ", account=" + account + "]";
+	}
 
 }

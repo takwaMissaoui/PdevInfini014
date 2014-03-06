@@ -7,7 +7,9 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import Pidev.entite.AskBid;
 import Pidev.entite.BanqueCommercial;
+import Pidev.entite.Currency;
 
 /**
  * Session Bean implementation class BanqueCommercialService
@@ -17,23 +19,24 @@ import Pidev.entite.BanqueCommercial;
 public class BanqueCommercialService implements BanqueCommercialServiceRemote {
 	@PersistenceContext(unitName = "JPA")
 	private EntityManager em;
-    /**
-     * Default constructor. 
-     */
-    public BanqueCommercialService() {
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * Default constructor.
+	 */
+	public BanqueCommercialService() {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public void add(BanqueCommercial B) {
 		em.persist(B);
-		
+
 	}
 
 	@Override
 	public void update(BanqueCommercial B) {
 		em.merge(B);
-		
+
 	}
 
 	@Override
@@ -43,14 +46,21 @@ public class BanqueCommercialService implements BanqueCommercialServiceRemote {
 
 	@Override
 	public List<BanqueCommercial> findAll() {
-		return em.createQuery("from BanqueCommercial",BanqueCommercial.class).getResultList();
+		return em.createQuery("from BanqueCommercial", BanqueCommercial.class)
+				.getResultList();
 	}
 
 	@Override
 	public void delete(BanqueCommercial B) {
-		BanqueCommercial Ba=findByID(B.getID_Client());
+		BanqueCommercial Ba = findByID(B.getIdClient());
 		em.remove(Ba);
-		
+
+	}
+
+	@Override
+	public void updatePrices(Currency currency, AskBid ask_bid) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

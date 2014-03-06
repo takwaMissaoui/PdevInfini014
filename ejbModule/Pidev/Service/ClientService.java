@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 
 import javax.persistence.PersistenceContext;
 
-
 import Pidev.entite.Client;
 
 /**
@@ -28,19 +27,18 @@ public class ClientService implements ClientServiceRemote {
 	}
 
 	@Override
-	public void add(Client C) {
-	em.persist(C);
+	public void add(Client client) {
+		em.persist(client);
 
 	}
 
 	@Override
-	public void update(Client C) {
-		em.merge(C);
+	public void update(Client client) {
+		em.merge(client);
 
 	}
 
 	@Override
-	
 	public Client findByID(int ID) {
 		return em.find(Client.class, ID);
 
@@ -48,15 +46,14 @@ public class ClientService implements ClientServiceRemote {
 
 	@Override
 	public List<Client> findAll() {
-		
-		return em.createQuery("from Client",Client.class).getResultList();
+
+		return em.createQuery("from Client", Client.class).getResultList();
 	}
 
 	@Override
-	public void delete(Client C) {
-		Client Cl=findByID(C.getID_Client());
-		em.remove(Cl);
-		
+	public void delete(Client client) {
+		Client cl = findByID(client.getIdClient());
+		em.remove(cl);
 
 	}
 
