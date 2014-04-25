@@ -1,9 +1,12 @@
 package entitiesClient;
 import java.util.Currency;
+
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import Pdev.Service.CurrencyServiceRemote;
+import Pidev.Service.Currency.CurrencyServiceRemote;
+
+
 
 public class boot {
 
@@ -49,7 +52,7 @@ public class boot {
 	try{
 		context= new InitialContext();
 		CurrencyServiceRemote csr = (CurrencyServiceRemote) context
-				.lookup("Pdev0/CurrencyService!Pdev.Service.CurrencyServiceRemote");
+				.lookup("/Pdev_EJB/CurrencyService!Pidev.Service.Currency.CurrencyServiceRemote");
 		
 	/*	for(String s : locales){
 			
@@ -58,7 +61,7 @@ public class boot {
 
 	//	Currency cur = Currency.getInstance(obj);
 	//	c.setCountry( obj.getDisplayCountry());
-		Pdev.entity.Currency c = new Pdev.entity.Currency();
+		Pidev.entite.Currency c = new Pidev.entite.Currency();
 		for (Currency cur : Currency.getAvailableCurrencies())
 		{	
 		c.setId_currency(cur.getSymbol());
