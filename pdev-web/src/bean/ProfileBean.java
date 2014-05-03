@@ -1,8 +1,5 @@
 package bean;
 
-import java.util.Set;
-import java.util.TreeSet;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -11,8 +8,11 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import Pidev.Service.Client.ClientServiceLocal;
+import Pidev.Service.Currency.CurrencyServiceLocal;
+import Pidev.entite.BanqueCommercial;
 import Pidev.entite.Client;
-import Pidev.entite.Trader;
+import Pidev.entite.Corporate;
+
 
 
 @SessionScoped
@@ -28,29 +28,25 @@ private String email;
 private String description;
 HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 private String connectedUser = (String)session.getAttribute("connectedUser");
-
-private Trader trader=new Trader();
+private boolean corporateRendred= false;
+private boolean bankRendred=false;
 
 
 
 @EJB
 ClientServiceLocal clientServiceLocal;
 
+@EJB
+CurrencyServiceLocal currencyServiceLocal;
+
 @PostConstruct
 public void init(){
-	System.out.println(connectedUser);
-	client=clientServiceLocal.findByLogin(connectedUser);
 	
-}
-
-
-public Trader getTrader() {
-	return trader;
-}
-
-
-public void setTrader(Trader trader) {
-	this.trader = trader;
+	client=clientServiceLocal.findByLogin(connectedUser);
+	if(client instanceof Corporate) corporateRendred= true;
+	if(client instanceof BanqueCommercial) bankRendred=true;
+	System.out.println("corporate="+corporateRendred);
+	System.out.println("bank="+bankRendred);
 }
 
 
@@ -118,13 +114,25 @@ public void setDescription(String description) {
 	this.description = description;
 }
 
-public void doAddTrader(){
-	Set<Trader> set= new TreeSet<Trader>();
-	set.add(trader);
-	client.setTrader(set);
-	
-	clientServiceLocal.update(client);
-	
-	
-}	
+
+public boolean isCorporateRendred() {
+	return corporateRendred;
+}
+
+
+public void setCorporateRendred(boolean corporateRendred) {
+	this.corporateRendred = corporateRendred;
+}
+
+
+public boolean isBankRendred() {
+	return bankRendred;
+}
+
+
+public void setBankRendred(boolean bankRendred) {
+	this.bankRendred = bankRendred;
+}
+
+
 }

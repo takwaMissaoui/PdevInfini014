@@ -16,4 +16,5 @@ public interface CurrencyAccountBanqueServiceLocal {
 	List<CurrencyAccountBanque> findAll();
 
 	void delete(CurrencyAccountBanque accountB);
+	List<String>findInitializedCurrency();
 }

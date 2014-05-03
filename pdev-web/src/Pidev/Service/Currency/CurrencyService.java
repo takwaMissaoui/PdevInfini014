@@ -88,6 +88,16 @@ public class CurrencyService implements CurrencyServiceRemote , CurrencyServiceL
 				.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<String> findallAvailableIds() {
+		
+
+		Query query= em.createQuery("select c.id_currency from Currency c where c.is_available=:param");
+		query.setParameter("param", true);
+		return query.getResultList();
+	}
+
 
 
 }

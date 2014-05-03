@@ -22,7 +22,7 @@ import javax.persistence.Table;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "t_Client")
-public class Client implements Serializable {
+public class Client implements Serializable  {
 	/**
 	 * 
 	 */
@@ -184,5 +184,7 @@ public class Client implements Serializable {
 	public void setDescreption(String descreption) {
 		this.descreption = descreption;
 	}
+
+
 
 }

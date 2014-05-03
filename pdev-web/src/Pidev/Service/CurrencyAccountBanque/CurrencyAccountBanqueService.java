@@ -6,6 +6,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import Pidev.entite.CurrencyAccountBanque;
 
@@ -54,6 +55,18 @@ public class CurrencyAccountBanqueService implements
 		CurrencyAccountBanque cab = findByID(accountB.getIdAccountBanque());
 		em.remove(cab);
 
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<String> findInitializedCurrency() {
+		
+		Query query = em.createQuery("select c.currency_id_currency from CurrencyAccountBanque c where c.initialized=:param");
+		query.setParameter("param", true);
+		return query.getResultList();
+		
+	
+		
 	}
 
 }

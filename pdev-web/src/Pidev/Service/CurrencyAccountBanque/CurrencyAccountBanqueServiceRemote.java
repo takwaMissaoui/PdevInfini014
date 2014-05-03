@@ -17,5 +17,6 @@ public interface CurrencyAccountBanqueServiceRemote {
 	List<CurrencyAccountBanque> findAll();
 
 	void delete(CurrencyAccountBanque accountB);
+	List<String>findInitializedCurrency();
 
 }

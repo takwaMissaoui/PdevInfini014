@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "t_currency_account_corporate")
-public class CurrencyAccountCorporate implements Serializable {
+public class CurrencyAccountCorporate implements Serializable,Comparable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_account_corporate")
@@ -88,6 +88,11 @@ public class CurrencyAccountCorporate implements Serializable {
 		return "CurrencyAccountCorporate [idAccountCorporate="
 				+ idAccountCorporate + ", currency=" + currency + ", amount="
 				+ amount + "]";
+	}
+
+	@Override
+	public int compareTo(Object obj) {
+		return((this.idAccountCorporate)-((CurrencyAccountCorporate)obj).getIdAccountCorporate());
 	}
 
 }

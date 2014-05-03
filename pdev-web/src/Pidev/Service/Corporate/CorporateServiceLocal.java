@@ -2,6 +2,7 @@ package Pidev.Service.Corporate;
 
 import java.util.List;
 
+
 import javax.ejb.Local;
 
 import Pidev.entite.Corporate;
@@ -16,5 +17,7 @@ public interface CorporateServiceLocal {
 	List<Corporate> findAll();
 
 	void delete(Corporate corporate);
+	
+	
 
 }

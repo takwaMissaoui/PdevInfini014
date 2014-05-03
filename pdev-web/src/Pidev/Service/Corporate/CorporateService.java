@@ -53,5 +53,8 @@ public class CorporateService implements CorporateServiceRemote,CorporateService
 		Corporate co = findByID(corporate.getIdClient());
 		em.remove(co);
 	}
+	
+	
+	
 
 }

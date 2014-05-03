@@ -2,10 +2,12 @@ package Pidev.entite;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -26,8 +28,9 @@ public class BanqueCommercial extends Client {
 	@OneToOne( fetch = FetchType.LAZY)
 	@JoinColumn(name = "Scoreboard_FK")
 	private ScoreboardPrices scoreboard;
-
-	@OneToMany(fetch = FetchType.LAZY)
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "Banque_Account", joinColumns = { @JoinColumn(name = "Banque_fk") }, inverseJoinColumns = { @JoinColumn(name = "Account_fk") })
 	private Set<CurrencyAccountBanque> account;
 
 	public BanqueCommercial() {

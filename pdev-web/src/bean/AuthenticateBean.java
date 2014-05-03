@@ -4,7 +4,6 @@ import javax.ejb.EJB;
 import javax.el.ELContext;
 import javax.faces.FacesException;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
@@ -14,6 +13,7 @@ import Pidev.Service.Admin.AdminServiceLocal;
 import Pidev.Service.Client.ClientServiceLocal;
 import Pidev.Service.Trader.TraderServiceLocal;
 import Pidev.entite.Admin;
+import Pidev.entite.BanqueCommercial;
 import Pidev.entite.Client;
 import Pidev.entite.Corporate;
 import Pidev.entite.Trader;
@@ -94,7 +94,13 @@ public class AuthenticateBean {
 		 {
 			if (client instanceof Corporate )
 			{ session.setAttribute("connectedUser", client.getLogin());
-				return "CorporateProfile";}
+				return "Profile";}
+			
+			if (client instanceof BanqueCommercial )
+			{ session.setAttribute("connectedUser", client.getLogin());
+				return "Profile";}
+			
+			
 			
 		 }
 		
@@ -121,26 +127,13 @@ public class AuthenticateBean {
 		trader = new Trader();
 		
 		navigateTo="login.jsf";
-		return navigateTo;}
+		return navigateTo;
+		
 	
-//	public static Object getAuthenticateBean(final String AuthenticateBean) {
-//	    FacesContext fc = FacesContext.getCurrentInstance();
-//	    Object bean;
-//	    
-//	    try {
-//	        ELContext elContext = fc.getELContext();
-//	        bean = elContext.getELResolver().getValue(elContext, null, AuthenticateBean);
-//	    } catch (RuntimeException e) {
-//	        throw new FacesException(e.getMessage(), e);
-//	    }
-//
-//	    if (bean == null) {
-//	        throw new FacesException("Managed bean with name '" + AuthenticateBean
-//	            + "' was not found. Check your faces-config.xml or @ManagedBean annotation.");
-//	    }
-//
-//	    return bean;
-//	}
+	//revoir cette methode
+		}
+	
+
 	
 	
 	

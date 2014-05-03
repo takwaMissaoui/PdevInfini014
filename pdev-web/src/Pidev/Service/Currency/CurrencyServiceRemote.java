@@ -22,5 +22,7 @@ public interface CurrencyServiceRemote {
 	public void delete(Currency currency);
 	public void setLocal(Currency currency);
 	public List<String> findallIds();
+	
+	public List<String> findallAvailableIds();
 
 }

@@ -17,11 +17,12 @@ import Pidev.entite.Currency;
 @SessionScoped
 public class CurrencySelectOneListboxView {
 
-	    private Currency selectedCurrency;
+	    static private Currency localCurrency;
 	    private String id;
 	    private List<SelectItem> workingCurrenciesList=new ArrayList<SelectItem>();
 	    private List<Currency> currencies;
 	    private List<String> currenciesIds;
+	   
 	    
 	    
 	    @EJB
@@ -39,11 +40,11 @@ public class CurrencySelectOneListboxView {
 		}
 		
 		
-		public Currency getSelectedCurrency() {
-			return selectedCurrency;
+		public Currency getlocalCurrency() {
+			return localCurrency;
 		}
-		public void setSelectedCurrenciesList(Currency selectedCurrency) {
-			this.selectedCurrency = selectedCurrency;
+		public void setSelectedCurrenciesList(Currency localCurrency) {
+			this.localCurrency = localCurrency;
 		}
 		public List<SelectItem> getWorkingCurrenciesList() {
 			
@@ -74,6 +75,7 @@ public class CurrencySelectOneListboxView {
 			System.out.println(id);
 		       Currency currency=currencyServiceLocal.findBy(id);
 				currencyServiceLocal.setLocal(currency);
+				localCurrency=currency;
 			
 		}
 

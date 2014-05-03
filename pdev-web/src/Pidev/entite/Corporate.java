@@ -2,8 +2,11 @@ package Pidev.entite;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
 
@@ -16,7 +19,8 @@ public class Corporate extends Client {
 
 	private double capitale;
 	
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "Corporate_Account", joinColumns = { @JoinColumn(name = "Corporate_fk") }, inverseJoinColumns = { @JoinColumn(name = "Account_fk") })
 	private Set<CurrencyAccountCorporate> account;
 
 	public Corporate() {

@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "t_trader")
-public class Trader implements Serializable  {
+public class Trader implements Serializable ,Comparable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_trader")
@@ -100,6 +100,16 @@ public class Trader implements Serializable  {
 		return "Trader [idTradeur=" + idTradeur + ", libelle=" + libelle
 				+ ", login=" + login + ", password=" + password + ", mail="
 				+ mail + "]";
+	}
+
+	@Override
+	
+	public int compareTo(Object obj) {
+		
+		return this.login.compareTo(( (Trader)obj).getLogin() ) ;
+			
+		
+		
 	}
 	
 	

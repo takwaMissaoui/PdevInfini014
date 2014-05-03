@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "t_currency_account_banque")
-public class CurrencyAccountBanque implements Serializable {
+public class CurrencyAccountBanque implements Serializable,Comparable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_account_banque")
@@ -24,6 +24,8 @@ public class CurrencyAccountBanque implements Serializable {
 	private Currency currency;
 
 	private float amount;
+	
+	private boolean initialized;
 
 	public CurrencyAccountBanque() {
 		// TODO Auto-generated constructor stub
@@ -88,5 +90,25 @@ public class CurrencyAccountBanque implements Serializable {
 		return "CurrencyAccountBanque [idAccountBanque=" + idAccountBanque
 				+ ", currency=" + currency + ", amount=" + amount + "]";
 	}
+
+	public boolean isInitialized() {
+		return initialized;
+	}
+
+	public void setInitialized(boolean initialized) {
+		this.initialized = initialized;
+	}
+	
+	@Override
+	public int compareTo(Object obj) {
+		
+		if((this.currency.getId_currency()).equals(((CurrencyAccountBanque)obj).getCurrency().getId_currency())) return 0 ;
+		else
+		return((this.idAccountBanque)-((CurrencyAccountBanque)obj).getIdAccountBanque());
+		
+	
+		
+	}
+	
 
 }
