@@ -98,6 +98,8 @@ public class CurrencyService implements CurrencyServiceRemote , CurrencyServiceL
 		return query.getResultList();
 	}
 
+	
+
 
 
 }

@@ -3,19 +3,18 @@ package bean;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import Pidev.Service.Client.ClientServiceLocal;
 import Pidev.Service.Currency.CurrencyServiceLocal;
-import Pidev.entite.BanqueCommercial;
 import Pidev.entite.Client;
-import Pidev.entite.Corporate;
 
 
 
-@SessionScoped
+@ViewScoped
 @ManagedBean
 public class ProfileBean {
 
@@ -28,11 +27,6 @@ private String email;
 private String description;
 HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 private String connectedUser = (String)session.getAttribute("connectedUser");
-private boolean corporateRendred= false;
-private boolean bankRendred=false;
-
-
-
 @EJB
 ClientServiceLocal clientServiceLocal;
 
@@ -43,10 +37,7 @@ CurrencyServiceLocal currencyServiceLocal;
 public void init(){
 	
 	client=clientServiceLocal.findByLogin(connectedUser);
-	if(client instanceof Corporate) corporateRendred= true;
-	if(client instanceof BanqueCommercial) bankRendred=true;
-	System.out.println("corporate="+corporateRendred);
-	System.out.println("bank="+bankRendred);
+
 }
 
 
@@ -112,26 +103,6 @@ public String getDescription() {
 
 public void setDescription(String description) {
 	this.description = description;
-}
-
-
-public boolean isCorporateRendred() {
-	return corporateRendred;
-}
-
-
-public void setCorporateRendred(boolean corporateRendred) {
-	this.corporateRendred = corporateRendred;
-}
-
-
-public boolean isBankRendred() {
-	return bankRendred;
-}
-
-
-public void setBankRendred(boolean bankRendred) {
-	this.bankRendred = bankRendred;
 }
 
 

@@ -1,18 +1,16 @@
 package bean;
 
 import javax.ejb.EJB;
-import javax.el.ELContext;
-import javax.faces.FacesException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import Pidev.Service.Admin.AdminServiceLocal;
 import Pidev.Service.Client.ClientServiceLocal;
 import Pidev.Service.Trader.TraderServiceLocal;
 import Pidev.entite.Admin;
+import Pidev.entite.BanqueCentrale;
 import Pidev.entite.BanqueCommercial;
 import Pidev.entite.Client;
 import Pidev.entite.Corporate;
@@ -27,6 +25,8 @@ public class AuthenticateBean {
 	 private Admin admin;
 	 private Client client;
 	 private Trader trader;
+	 private boolean corporateRendred= false;
+	 private boolean bankRendred=false;
 	
 
 	private boolean failure=false;
@@ -94,12 +94,21 @@ public class AuthenticateBean {
 		 {
 			if (client instanceof Corporate )
 			{ session.setAttribute("connectedUser", client.getLogin());
+			corporateRendred=true;
 				return "Profile";}
 			
 			if (client instanceof BanqueCommercial )
 			{ session.setAttribute("connectedUser", client.getLogin());
+			bankRendred=true;
 				return "Profile";}
 			
+			if(client instanceof BanqueCentrale)
+			{
+				session.setAttribute("connectedUser", client.getLogin());
+				
+				return "centralBank";
+				
+			}
 			
 			
 		 }
@@ -120,17 +129,31 @@ public class AuthenticateBean {
 		 return null;
 	}
 	
+	
+	
+	public boolean isCorporateRendred() {
+		return corporateRendred;
+	}
+
+	public void setCorporateRendred(boolean corporateRendred) {
+		this.corporateRendred = corporateRendred;
+	}
+
+	public boolean isBankRendred() {
+		return bankRendred;
+	}
+
+	public void setBankRendred(boolean bankRendred) {
+		this.bankRendred = bankRendred;
+	}
+
 	public String logout(){
 		String navigateTo=null;
 		admin= new Admin();
 		client = new Client();
 		trader = new Trader();
-		
 		navigateTo="login.jsf";
 		return navigateTo;
-		
-	
-	//revoir cette methode
 		}
 	
 
