@@ -97,7 +97,7 @@ public class AuthenticateBean {
 			corporateRendred=true;
 				return "Profile";}
 			
-			if (client instanceof BanqueCommercial )
+			if ((client instanceof BanqueCommercial) && ((BanqueCommercial)client).isReqConfirmed()==true )
 			{ session.setAttribute("connectedUser", client.getLogin());
 			bankRendred=true;
 				return "Profile";}

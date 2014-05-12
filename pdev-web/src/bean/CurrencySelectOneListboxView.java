@@ -89,14 +89,6 @@ public class CurrencySelectOneListboxView {
 			this.id = id;
 		}
 		
-		public void doSetAvailable(){
-			
-			System.out.println(id);
-		       Currency currency=currencyServiceLocal.findBy(id);
-		       currency.setIs_available(true);
-				currencyServiceLocal.update(currency);
-				
-			
-		}
+	
 	
 }

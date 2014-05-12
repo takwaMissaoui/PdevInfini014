@@ -42,4 +42,15 @@ $(function afficheDate()// Notre fonction pour afficher la date et l'heure
 
 		});
 
+$(window).on('load', function () {
+
+	 $('.selectpicker').selectpicker({
+		 liveSearch  : true,
+	      style: 'btn-default',
+	      size: 7
+	  });
+   $('.selectpicker').selectpicker('refresh');
+
+   // $('.selectpicker').selectpicker('hide');
+});
 

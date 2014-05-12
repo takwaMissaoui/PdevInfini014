@@ -17,7 +17,7 @@ public interface BanqueCommercialServiceRemote {
 	 void delete(BanqueCommercial B);
 	 void updatePrices(Currency currency,AskBid ask_bid);
 	 //il faut crree un trader apres avoir saisie les donnees de chak trader
-	// void addTrader(Trader trader);
+	 // void addTrader(Trader trader);
 	 //void removeTrader(Trader trader);
 	 //void modifyTrader(Trader trader);
 	 //void addCurrencyAccountBanque(CurrencyAccountBanque currencyAB);
