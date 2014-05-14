@@ -21,4 +21,6 @@ public interface BanqueCommercialServiceLocal {
 	void delete(BanqueCommercial B);
 
 	void updatePrices(Currency currency, AskBid ask_bid);
+	List<String> findALLNames();
+	 BanqueCommercial findByLogin(String login);
 }

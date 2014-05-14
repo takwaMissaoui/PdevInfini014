@@ -15,5 +15,6 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="/home/takwa/Vidéos/video/auto/bootstrap-1.0.10.jar"/>
 	<classpathentry kind="lib" path="/home/takwa/Vidéos/video/auto/select2-3.4.6.jar"/>
+	<classpathentry kind="lib" path="/home/takwa/infini2/pdev/git/PdevClient014/mashups4jsf-core-1.0.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

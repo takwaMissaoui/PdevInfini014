@@ -6,10 +6,12 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import Pidev.entite.AskBid;
 import Pidev.entite.BanqueCommercial;
 import Pidev.entite.Currency;
+import Pidev.entite.Trader;
 
 /**
  * Session Bean implementation class BanqueCommercialService
@@ -62,5 +64,28 @@ public class BanqueCommercialService implements BanqueCommercialServiceRemote,Ba
 		// TODO Auto-generated method stub
 
 	}
+	
+	@Override
+	public List<String> findALLNames(){
+		
+		return em.createQuery("select b.login from BanqueCommercial b ", String.class)
+				.getResultList();
+		
+	}
 
+	
+	@Override
+	public BanqueCommercial findByLogin(String login){
+		BanqueCommercial found = null;
+		String jpql = "select b from BanqueCommercial b where b.login=:login ";
+		Query query = em.createQuery(jpql);
+		query.setParameter("login", login);
+
+		try {
+			found = (BanqueCommercial) query.getSingleResult();
+		} catch (Exception ex) {
+		}
+		return found;
+		
+	}
 }
